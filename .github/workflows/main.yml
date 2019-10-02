@@ -13,7 +13,7 @@ jobs:
           - 4444:4444
         options: --network host
     container:
-      image:  heroku/heroku:16-build
+      image: heroku/heroku:16-build
       ports:
         - 5000
       options: --network host
@@ -29,6 +29,7 @@ jobs:
     - name: start flask and run test
       run: |
         ls
+        ip a
         python dummyapp.py &
         echo winner
         sleep 3
