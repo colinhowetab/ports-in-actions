@@ -6,15 +6,29 @@ jobs:
   build:
     name: Test cross-container comms
     runs-on: ubuntu-latest
+    services:
+      chromedriver:
+        image: selenium/standalone-chrome:3.141.59-titanium
+        ports:
+          - 4444:4444
     container:
-      image: node:10.16-jessie
-      env:
-        NODE_ENV: development
+      image:  heroku/heroku:16-build
       ports:
-        - 80
+        - 5000
     steps:
     - uses: actions/checkout@v1
-    - name: test docker
+    - name: install latest pip from PyPA
       run: |
-        echo hello
-        docker ps
+        curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+        python get-pip.py
+    - name: install dependencies
+      run: |
+        pip install flask selenium
+    - name: start flask and run test
+      run: |
+        ls
+        python dummyapp.py &
+        echo winner
+        sleep 3
+        echo doing test
+        python selenium-test.py
