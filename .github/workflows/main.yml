@@ -11,10 +11,12 @@ jobs:
         image: selenium/standalone-chrome:3.141.59-titanium
         ports:
           - 4444:4444
+        options: --network host
     container:
       image:  heroku/heroku:16-build
       ports:
         - 5000
+      options: --network host
     steps:
     - uses: actions/checkout@v1
     - name: install latest pip from PyPA
