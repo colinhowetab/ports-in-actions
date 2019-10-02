@@ -4,6 +4,8 @@ on: [push]
 
 jobs:
   build:
+    name: Test cross-container comms
+    runs-on: ubuntu-latest
     container:
       image: node:10.16-jessie
       env:
