@@ -20,6 +20,8 @@ jobs:
     - name: install latest pip from PyPA
       run: |
         nslookup 172.18.0.2
+        echo ${{ job.container.id }}
+        ping ${{ job.container.id	}}
         curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
         python get-pip.py
     - name: install dependencies
